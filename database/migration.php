@@ -1,14 +1,7 @@
 <?php
 
 require_once '../bootstrap.php';
+require_once 'db_connect.php';
 
-$dbc->exec('DROP TABLE IF EXISTS users');
-
-$query = 'CREATE TABLE users (
-    id INT UNSIGNED NOT NULL AUTO_INCREMENT,
-    email VARCHAR(256) NOT NULL,
-    password VARCHAR(256) NOT NULL,
-    PRIMARY KEY (id)
-)';
-
-$dbc->exec($query);
+require_once 'create_users_table.php';
+require_once 'create_ads_table.php';

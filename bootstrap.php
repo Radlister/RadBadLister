@@ -1,7 +1,9 @@
 <?php
 
-require_once './utils/Auth.php';
-require_once './utils/Input.php';
-require_once './utils/Logger.php';
+// Include ENV variables.
+$_ENV = require_once '.env.php';
 
-$_ENV = include './.env.php';
+// require_once './utils/Auth.php';
+// require_once './utils/Input.php';
+// require_once './utils/Logger.php';
+
