@@ -31,8 +31,8 @@ $ads = [
     ],
     [
         'title'         => 'Awesome Car Tire',
-        'description'   => 'Genuine rubber 100% car 5 star tire, slightly used.',
-        'image_url'     => 'img/used_tire.jpg',
+        'description'   => 'Genuine tires, slightly used car tire',
+        'image_url'     => '/img/used_tire.jpg',
         'price'         => 5.95
     ],
     [
@@ -43,13 +43,15 @@ $ads = [
     ],
 ];
 
+
 foreach($ads as $ad) {
+    $date = date("Y-m-d H:i:s");
 
     $newAdd = new Ad();
     $newAdd->title = $ad['title'];
     $newAdd->description = $ad['description'];
     $newAdd->image_url = $ad['image_url'];
     $newAdd->price = $ad['price'];
+    $newAdd->created_at = $date;
     $newAdd->save();
-
 }

@@ -1,9 +1,6 @@
 <?php
 
-define('DB_HOST', '127.0.0.1');
-define('DB_NAME', 'parks_db');
-define('DB_USER', 'parks_user');
-define('DB_PASS', 'password');
+require_once '../bootstrap.php';
 
 class Model {
 
@@ -28,7 +25,8 @@ class Model {
 
         if (!self::$dbc)
         {
-            self::$dbc = new PDO('mysql:host=' . DB_HOST . ';dbname=' . DB_NAME, DB_USER, DB_PASS);
+            self::$dbc = new PDO('mysql:host=' . $_ENV['DB_HOST'] .
+                ';dbname=' . $_ENV['DB_NAME'], $_ENV['DB_USER'], $_ENV['DB_PASS']);
 
             // Tell PDO to throw exceptions on error
             self::$dbc->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -55,57 +53,6 @@ class Model {
     {
         // Store name/value pair in attributes array
         $this->attributes[$name] = $value;
-    }
-
-    /*
-     * Persist the object to the database
-     */
-    public function save()
-    {
-        // @TODO: Ensure there are attributes before attempting to save
-
-        // @TODO: Perform the proper action - if the `id` is set, this is an update, if not it is a insert
-
-        // @TODO: Ensure that update is properly handled with the id key
-
-        // @TODO: After insert, add the id back to the attributes array so the object can properly reflect the id
-
-        // @TODO: You will need to iterate through all the attributes to build the prepared query
-
-        // @TODO: Use prepared statements to ensure data security
-    }
-
-    /*
-     * Find a record based on an id
-     */
-    public static function find($id)
-    {
-        // Get connection to the database
-        self::dbConnect();
-
-        // @TODO: Create select statement using prepared statements
-
-        // @TODO: Store the resultset in a variable named $result
-
-        // The following code will set the attributes on the calling object based on the result variable's contents
-
-        $instance = null;
-        if ($result)
-        {
-            $instance = new static;
-            $instance->attributes = $result;
-        }
-        return $instance;
-    }
-
-    /*
-     * Find all records in a table
-     */
-    public static function all()
-    {
-        self::dbConnect();
-
-        // @TODO: Learning from the previous method, return all the matching records
     }
 
 }

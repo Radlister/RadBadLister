@@ -8,7 +8,6 @@ $query = 'CREATE TABLE ads (
     description VARCHAR(4096) NOT NULL,
     image_url VARCHAR(256),
     price DECIMAL(10, 2),
-    user_id INT NOT NULL,
     created_at DATETIME,
     modified_at DATETIME,
     PRIMARY KEY (id)
