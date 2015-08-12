@@ -2,7 +2,7 @@
 
 require_once '../bootstrap.php';
 require_once 'db_connect.php';
-require_once '../models/User.php';
+require_once '../models/Ad.php';
 
 $ads = [
     [
@@ -42,7 +42,6 @@ $ads = [
         'price'         => 23
     ],
 ];
-
 
 foreach($ads as $ad) {
 

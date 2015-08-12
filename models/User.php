@@ -66,15 +66,21 @@ class User extends Model {
         $stmt->bindValue(':first_name', $this->attributes['first_name'], PDO::PARAM_STR);
         $stmt->bindValue(':last_name', $this->attributes['last_name'], PDO::PARAM_STR);
         $stmt->bindValue(':id', $this->attributes['id'], PDO::PARAM_INT);
+        $stmt->bindValue(':email', $this->attributes['email'], PDO::PARAM_STR);
+        $stmt->bindValue(':password', $this->attributes['password'], PDO::PARAM_STR);
         $stmt->execute();
     }
 
     public function insert()
     {
-        $query = 'INSERT INTO users (first_name, last_name) VALUES (:first_name, :last_name);';
+        $query = 'INSERT INTO users
+            (first_name, last_name, email, password)
+            VALUES (:first_name, :last_name, :email, :password);';
         $stmt = self::$dbc->prepare($query);
         $stmt->bindValue(':first_name', $this->attributes['first_name'], PDO::PARAM_STR);
         $stmt->bindValue(':last_name', $this->attributes['last_name'], PDO::PARAM_STR);
+        $stmt->bindValue(':email', $this->attributes['email'], PDO::PARAM_STR);
+        $stmt->bindValue(':password', $this->attributes['password'], PDO::PARAM_STR);
         $stmt->execute();
     }
 

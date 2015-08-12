@@ -11,6 +11,7 @@ $user->email = $_ENV['USER_EMAIL'];
 $user->password = $_ENV['USER_PASSWORD'];
 $user->save();
 
+$user1 = new User();
 $user1->first_name = 'Bobby';
 $user1->last_name = 'Bobberson';
 $user1->email = 'Bob@bobberson.media';

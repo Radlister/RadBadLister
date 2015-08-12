@@ -2,9 +2,28 @@
 
 require_once 'BaseModel.php';
 
-class Park extends Model {
+class Ad extends Model {
 
-    protected static $table = 'parks';
+    protected static $table = 'ads';
+
+    public static function categorySearch($search)
+    {
+        self::dbConnect();
+
+        $query = 'SELECT * FROM ' . static::$table . ' WHERE category = :search';
+        $stmt = self::$dbc->prepare($query);
+        $stmt->bindValue(':search', $search, PDO::PARAM_INT);
+        $stmt->execute();
+
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+            $instance = null;
+            if ($result) {
+                $instance = new static;
+                $instance->attributes = $result;
+            }
+            return $instance;
+    }
 
     public static function find($id)
     {
@@ -12,7 +31,7 @@ class Park extends Model {
 
             self::dbConnect();
 
-            $query = 'SELECT * FROM parks WHERE id = :id';
+            $query = 'SELECT * FROM ' . static::$table . ' WHERE id = :id';
             $stmt = self::$dbc->prepare($query);
             $stmt->bindValue(':id', $id, PDO::PARAM_INT);
             $stmt->execute();
@@ -31,7 +50,7 @@ class Park extends Model {
     public static function all()
     {
         self::dbConnect();
-        $stmt = self::$dbc->query('SELECT * FROM parks');
+        $stmt = self::$dbc->query('SELECT * FROM ' . static::$table);
         $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
         $instance = null;
@@ -54,7 +73,7 @@ class Park extends Model {
     protected function insert()
     {
         self::dbConnect();
-        $query = 'INSERT INTO parks
+        $query = 'INSERT INTO ' . static::$table . '
                     (name, description, area_in_acres, description, location)
                     VALUES (:name, :description, :area_in_acres, :date_established, :location);';
 
@@ -70,7 +89,7 @@ class Park extends Model {
     protected function update($id)
     {
         self::dbConnect();
-        $query = 'UPDATE parks
+        $query = 'UPDATE ' . static::$table . '
                     SET name = :name,
                         description = :description,
                         area_in_acres = :area_in_acres,
